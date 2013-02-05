@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE log4c SYSTEM "">
+
+<log4c version="1.2.1">
+
+	<config>
+		<bufsize>0</bufsize>
+		<debug level="2"/>
+		<nocleanup>0</nocleanup>
+		<reread>0</reread>
+	</config>
+
+	<category name="loginserver" priority="debug" appender="loginserver.log" />
+	<appender name="loginserver.log" type="rollingfile" logdir="./log/" prefix="loginserver.log" layout="dated" rollingpolicy="myrollingpolicy" />
+	<rollingpolicy name="myrollingpolicy" type="sizewin" maxsize="102400" maxnum="100" />
+
+<!--
+	<category name="six13log" priority="debug" appender="myappend" />
+	<appender name="myappend" type="stream2"  prefix="testappend"  layout="dated" logdir="." logfile="logfile"/>
+	<appender name="myappend2" type="rollingfile" logdir="." prefix="myprefix" layout="dated" rollingpolicy="myrollingpolicy" />
+	<rollingpolicy name="myrollingpolicy" type="sizewin" maxsize="1024" maxnum="10" />
+	<layout name="dated" type="dated"/>
+-->
+</log4c>

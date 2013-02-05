@@ -1,0 +1,1 @@
+test_srv_dbg.exe -f ../cfg/runconfig.xml

@@ -1,0 +1,65 @@
+client_udt.c:
+
+nd_common_init:     init mempool and log
+nd_net_init:        register_connector, include "tcp-connector" and "udt-connector"
+udt_connect:        connect to server
+udt_ioctl:          UDT_IOCTRL_DRIVER_MOD and UDT_IOCTRL_SET_DATAGRAM_ENTRY
+udt_send:           send udt buf
+udt_recv:           recv udt buf
+udt_close:
+
+=======================================
+conn_test.cpp:    //todo
+
+nd_cliapp_init:     nd_arg, nd_common_init, nd_net_init, RSAinit_random, nd_net_set_crypt and read config file.
+
+=======================================
+max_connect.c:   //hot
+
+nd_cliapp_init:     nd_arg, nd_common_init, nd_net_init, RSAinit_random, nd_net_set_crypt and read config file.
+nd_createthread:    
+create_connector:
+nd_msgentry_install
+nd_connectmsg_send_urgen:
+nd_connector_update:
+nd_waitthread:
+nd_cliapp_end:
+
+=======================================
+new_sendfile.c:  //todo
+
+nd_cliapp_init:
+nd_msgentry_install:
+start_encrypt:
+nd_connector_update:
+nd_cliapp_end:
+
+=======================================
+send_file.c:   //todo
+
+=======================================
+test_app.c:   //todo
+
+=======================================
+test_cli_netio.c   //todo
+
+nd_arg:
+nd_common_init() ;
+nd_net_init() ;
+nd_connector_open:  //use create_connector() instead
+
+=======================================
+test_client.c
+
+nd_common_init() ;
+nd_net_init() ;
+nd_tcpnode_init:
+nd_tcpnode_connect:
+nd_socket_nonblock:
+_init_ndmsg_buf:
+nd_tcpnode_send:
+nd_tcpnode_read:
+tcpnode_parse_recv_msg:
+
+=======================================
+test_raw.c

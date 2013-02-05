@@ -1,0 +1,3 @@
+svn checkout https://ndtplproj.googlecode.com/svn/trunk/ ndtplproj --username tpl.proj --password Ry6mB2eq5Ac8
+ --username tpl.proj --password Ry6mB2eq5Ac8
+

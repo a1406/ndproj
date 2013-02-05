@@ -1,0 +1,13 @@
+mainserver.c:  hot
+
+* init_module: nd_common_init, nd_net_init nd_srvcore_init(register_listensrv, include "listen-tcp", "listen-udt" and "listen-ext")
+* install_start_session: set crypt msg handle
+* nd_listensrv_open: see nd.txt
+* init_server_app: create_rsa_key, nd_object_create, nd_listensrv_set_single_thread, nd_listensrv_session_info, ND_SET_ONCONNECT_ENTRY, nd_srv_msgtable_create, install_start_session, nd_net_set_crypt, nd_listensrv_open
+
+start_server:           nd_arg, init_module(see below), read_config, init_server_app(see below)
+wait_services:
+end_server:
+
+========================================
+srv_test.cpp:   hot

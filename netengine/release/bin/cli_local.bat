@@ -1,0 +1,1 @@
+ndclient_dbg.exe -f ../cfg/cli_config.xml

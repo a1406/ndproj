@@ -1,0 +1,13 @@
+<server_config name="config">
+	<run_config>
+		<logfile>srvlog.log</logfile>
+		<port>7828</port>
+		<listen_mod desc="可以使用 lieten-tcp, listen-ext, listen-udt">listen-ext</listen_mod>
+		<max_connect name="最大连接数">200</max_connect>
+	</run_config>
+</server_config>
+<spray_set>
+	<map_config direct="../data" numbers="1">
+		<map1 id="1" max_player="8" name="test">map1.dat</map1>
+	</map_config>
+</spray_set>

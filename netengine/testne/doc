@@ -1,0 +1,17 @@
+login:
+c -> l: MSG_USER_LOGIN_REQ:  
+l -> m: MSG_USER_CHG_MAP;
+m -> l -> c: MSG_USER_CHG_MAP_RET;
+
+move:
+c -> l: MSG_USER_MOVE_REQ;
+
+action:
+c -> l -> m: MSG_USER_ACTION_REQ,
+m -> l: MSG_BROADCAST_TOUSER(MSG_USER_ACTION_ACK)
+l -> c: MSG_USER_ACTION_ACK
+
+scene:
+c -> l: MSG_USER_SCENE_REQ,
+l: find mapserver and send MSG_USER_SCENE_REQ,
+m: find info and send MSG_USER_SCENE_ACK;

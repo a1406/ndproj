@@ -1,0 +1,6 @@
+<connector name="config">
+	<logfile>clilog.log</logfile>
+	<remote_port>12345</remote_port>
+	<connect_protocol desc="可以使用 udt-connector,tcp-connector">tcp-connector</connect_protocol>
+	<host name="远程主机">192.168.1.103</host>
+</connector>

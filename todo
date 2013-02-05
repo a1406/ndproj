@@ -1,0 +1,17 @@
+2: chat
+3: loginserver 和 mapserver 无缝重启
+4: mapserver 间切换
+5: mapserver 对非活动用户清理
+6: 副本服务器
+7: lock tree operation(读写锁pthread_rwlock_init)
+10: 网络数据包得处理能否不拷贝
+参考nd_connector_update
+13: 看能否减少rb树和quad树的搜索次数
+14: 对地图的读取放到服务器端
+15: loginserver中nd_tcp.c:389导致ls经常和gs断开连接
+因为tea加密可能增加长度 所以 要先拷贝数据才能发送给客户端 否则会影响后面的数据
+为了不要这次拷贝，接收数据的时候就增加长度进行对齐，避免tea加密时候再增加长度 就可以省去一次拷贝
+还是拷贝比较好
+16: 客户端重绘
+17: 多线程方式的srv, 在处理数据的时候是直接处理，而不是拷贝到逻辑处理线程，这样效率是否会高一些？
+18: 单线程不用锁树 但是多线程要锁  但是单线程不能用preout, 所以， gate server用多线程， map server用单线程

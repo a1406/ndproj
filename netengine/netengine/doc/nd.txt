@@ -1,0 +1,80 @@
+1: nd_listensrv_open:
+   cm_listen(pmanger,  max_cm) ; // init pmanager(connect management)
+   ret = nd_tcpsrv_open(port,10,&(handle->tcp) );   //create a socket and bind, call listen() here 
+   ls_info.srv_entry = (nd_threadsrv_entry)_linux_listen_srv ;
+   handle->listen_id = nd_thsrv_createex(&ls_info,NDT_PRIORITY_HIGHT,0) ;
+
+==============
+
+connect_in_callback:
+    accetp_client_connect
+        _linux_listen_srv
+
+==============
+server recv data
+_linux_listen_srv -> nd_do_netmsg -> tcpnode_parse_recv_msgex -> srv_stream_data_entry
+
+srv_stream_data_entry calls nd_thsrv_send to send data to the thread id
+there are two functions deal this msg, they are _msg_th_func(accept and close is here) and _msg_entry
+
+_msg_th_func: _srv_entry(SUBSRV_MESSAGE)
+_msg_entry: nd_thsrv_msghandler and _srv_entry(SUBSRV_RUNMOD_LOOP)
+
+nd_thsrv_createex create a thread, the thread's function is _srv_entry;
+
+nd_thsrv_msghandler:
+udt and normal TCP type
+
+SUBSRV_RUNMOD_LOOP:
+start_timer_srv: not single thread
+create_sub_update_thread: 
+nd_listensrv_open: normal TCP type
+
+SUBSRV_MESSAGE:
+nd_listensrv_set_single_thread
+
+�ܽ᣺
+nd_listensrv_set_single_thread call "mqc->thid = nd_thsrv_create(&srv_info) ;" to create listen handle's thread, 
+this thread recv message from "addto_queue", and it set run_module = SUBSRV_MESSAGE, msg_entry = _msg_func.
+
+================
+connect:
+create_connector -> nd_connector_openex -> nd_tcpnode_connect -> nd_socket_tcp_connect -> connect
+
+================
+
+install msg parse func:
+nd_msgentry_install
+nd_srv_msgentry_install
+
+
+nd_srv_translate_message1 (no priority check)
+nd_srv_translate_message
+nd_translate_message (no priority check)
+
+================
+stream_data_entry:
+nd_connector_update:
+
+srv_stream_data_entry:
+nd_do_netmsg:
+_linux_listen_srv or common_update_entry:
+both of them are come from (nd_listensrv_open)
+
+==============
+
+nd_handle = listen_contex(nd_srv_node)
+
+void _lbuf_move_ahead(struct nd_linebuf *pbuf)  use memov instead memcpy
+_lbuf_tryto_move_ahead(pbuf);     use memov instead memcpy
+
+
+=====================
+1: timeout
+#define CONNECTION_TIMEOUT		60
+tryto_close_tcpsession:
+epoll_update_entry or common_update_entry
+
+2: subthread
+create_sub_update_thread(listen_info)
+it is epoll_update_entry, see it below.
